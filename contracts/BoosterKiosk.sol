@@ -49,8 +49,6 @@ contract BoosterKiosk is VRFConsumerBase, IERC1155Receiver {
     function supportsInterface(bytes4 _id) external view override returns(bool) {
         return true;
     }
-
-    // KOVAN TEST DATA
     
     constructor() 
         VRFConsumerBase(
@@ -130,6 +128,7 @@ contract BoosterKiosk is VRFConsumerBase, IERC1155Receiver {
             nItems[i-1] = 1;
         }
         collection.token.safeBatchTransferFrom(address(this), collection.owner[boosterId], ids, nItems, "0x00");
+        collection.unopened[msg.sender] = 0;
     }
     
     modifier collectionExists(string memory code) {
@@ -165,8 +164,8 @@ contract BoosterKiosk is VRFConsumerBase, IERC1155Receiver {
         return LINK.balanceOf(address(this));
     }
     
-    function availableBooster(string memory code, address adr) public view collectionExists(code) returns (bool) {
-        return listedCollections[code].unopened[adr] != 0;
+    function availableBooster(string memory code, address adr) public view collectionExists(code) returns (uint256) {
+        return listedCollections[code].unopened[adr];
     }
     
     function boosterStatus(string memory code, uint256 booster) public view collectionExists(code) returns (bool) {

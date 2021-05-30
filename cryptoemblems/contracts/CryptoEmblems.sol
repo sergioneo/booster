@@ -11,7 +11,7 @@ contract CryptoEmblems is BoosterEnabledToken {
     uint256 constant BOOSTER_SIZE = 2;
     bool LOCK_MINTING = false;
     
-    constructor() BoosterEnabledToken("https://gateway.pinata.cloud/ipfs/QmXW8JHDPrxe3tx2zHoRP3mEJAMNwzwRyk56EYsaAqcqSx/") {
+    constructor() BoosterEnabledToken("QmVuEm21GuDU6MxHPBa5gApm5dxyXFjmhtJTjHTekYvjUQ/metadata/{id}.json") {
         ALL_STICKERS = 10;
     }
     

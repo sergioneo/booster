@@ -33,7 +33,7 @@ abstract contract BoosterEnabledToken is ERC1155 {
         return addresses;
     }
     
-    function getMyStickers(address user) public view returns(uint256[] memory) {
+    function getItems(address user) public view returns(uint256[] memory) {
         return balanceOfBatch(getRepeatedAddress(user), getAllIds());
     }
     
