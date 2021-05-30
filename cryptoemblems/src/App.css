@@ -1,0 +1,67 @@
+@font-face {
+  font-family: "Old London";
+  src: url("Olondon_.otf") format("otf");
+}
+
+.emblem-sm-img {
+	max-width: 120px;
+}
+
+.emblem-sm {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 10px;
+}
+
+.emblem-lg-img {
+	max-width: 250px;
+}
+
+body {
+	height: 100%;
+	width: 100%;
+	background-size: cover;
+	background-image: url("bkg.jpg");
+}
+
+.overlay {
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0,0,0,0.8);
+}
+
+html, body, #root, .App {
+  height: 100%;
+  font-family: "Old London";
+}
+
+.logo {
+	color: white;
+	text-align: center;
+	padding-top: 45px;
+	font-size: 70px;
+	margin: 0px auto;
+	display: block;
+}
+
+.home {
+	text-align: center;
+	margin-top:  35px;
+	color: white;
+}
+
+.home button {
+	margin-top:  35px;
+}
+
+.store {
+	text-align: center;
+	color: white;
+}
+
+.detail {
+	max-width: 800px;
+	margin: 0px auto;
+	text-align: center;
+	color: white;
+}
