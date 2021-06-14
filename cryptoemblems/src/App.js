@@ -1,7 +1,7 @@
 import React, { useState, Component } from 'react'
 import Web3 from 'web3'
-import './App.css' 
-import { STORE_CODE, STICKER_TOKEN_ADDRESS, STICKER_STORE_ADDRESS, STICKER_TOKEN_ABI, STICKER_STORE_ABI } from './config'
+import './App.css'
+import { STORE_CODE, STICKER_TOKEN_ADDRESS, STICKER_STORE_ADDRESS, STICKER_TOKEN_ABI, STICKER_STORE_ABI, IPFS_GATEWAY } from './config'
 import {
   HashRouter as Router,
   Switch,
@@ -19,26 +19,26 @@ class App extends Component {
   componentDidMount() {
     // Just for the sake of the demo, let's preload all images
     const images = [
-      "https://gateway.pinata.cloud/ipfs/QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/1.png",
-      "https://gateway.pinata.cloud/ipfs/QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/2.png",
-      "https://gateway.pinata.cloud/ipfs/QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/3.png",
-      "https://gateway.pinata.cloud/ipfs/QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/4.png",
-      "https://gateway.pinata.cloud/ipfs/QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/5.png",
-      "https://gateway.pinata.cloud/ipfs/QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/6.png",
-      "https://gateway.pinata.cloud/ipfs/QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/7.png",
-      "https://gateway.pinata.cloud/ipfs/QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/8.png",
-      "https://gateway.pinata.cloud/ipfs/QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/9.png",
-      "https://gateway.pinata.cloud/ipfs/QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/10.png",
-      "https://gateway.pinata.cloud/ipfs/QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/1.png",
-      "https://gateway.pinata.cloud/ipfs/QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/2.png",
-      "https://gateway.pinata.cloud/ipfs/QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/3.png",
-      "https://gateway.pinata.cloud/ipfs/QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/4.png",
-      "https://gateway.pinata.cloud/ipfs/QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/5.png",
-      "https://gateway.pinata.cloud/ipfs/QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/6.png",
-      "https://gateway.pinata.cloud/ipfs/QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/7.png",
-      "https://gateway.pinata.cloud/ipfs/QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/8.png",
-      "https://gateway.pinata.cloud/ipfs/QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/9.png",
-      "https://gateway.pinata.cloud/ipfs/QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/10.png"
+      IPFS_GATEWAY+"QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/1.png",
+      IPFS_GATEWAY+"QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/2.png",
+      IPFS_GATEWAY+"QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/3.png",
+      IPFS_GATEWAY+"QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/4.png",
+      IPFS_GATEWAY+"QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/5.png",
+      IPFS_GATEWAY+"QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/6.png",
+      IPFS_GATEWAY+"QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/7.png",
+      IPFS_GATEWAY+"QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/8.png",
+      IPFS_GATEWAY+"QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/9.png",
+      IPFS_GATEWAY+"QmSW7ELBsHadiSvb4NfMUpMGvaztY6rEWjDv8NKSXiRseH/images/10.png",
+      IPFS_GATEWAY+"QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/1.png",
+      IPFS_GATEWAY+"QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/2.png",
+      IPFS_GATEWAY+"QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/3.png",
+      IPFS_GATEWAY+"QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/4.png",
+      IPFS_GATEWAY+"QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/5.png",
+      IPFS_GATEWAY+"QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/6.png",
+      IPFS_GATEWAY+"QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/7.png",
+      IPFS_GATEWAY+"QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/8.png",
+      IPFS_GATEWAY+"QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/9.png",
+      IPFS_GATEWAY+"QmX7sugwV644Pxo9izaj4kSGvXEqbtAL3WZ3ey3o8d9iah/bw-images/10.png"
     ]
     images.forEach((picture) => {
         const img = new Image();
@@ -102,7 +102,7 @@ class App extends Component {
     var metadataLib = this.state.metadata;
     for(var key = 0; key < metadataLib.length; key++) {
       if(metadataLib[key]["uri"] != null){
-        fetch("https://gateway.pinata.cloud/ipfs/"+metadataLib[key]["uri"])
+        fetch(IPFS_GATEWAY+""+metadataLib[key]["uri"])
         .then(response => response.json())
         .then((jsonData) => {
           // jsonData is parsed json object received from url
@@ -153,8 +153,8 @@ class App extends Component {
                 renders the first one that matches the current URL. */}
             <Switch>
               <Route path="/store">
-                <Store 
-                  wrappedBooster = {this.state.wrappedBooster} 
+                <Store
+                  wrappedBooster = {this.state.wrappedBooster}
                   buyBooster = {this.buyBooster.bind(this)}
                   openBooster = {this.openBooster.bind(this)}
                   wrappedBoosterStatus = {this.state.wrappedBoosterStatus}
@@ -182,8 +182,8 @@ function Home(props) {
   for(var i = 0; i < props.metadata.length; i++) {
     if (props.metadata[i].image != null) {
       const img = parseInt(props.inventory[i], 10) > 0 ?
-        <img className="emblem-sm-img" src={"https://gateway.pinata.cloud/ipfs/" + props.metadata[i].image} /> :
-        <img className="emblem-sm-img" src={"https://gateway.pinata.cloud/ipfs/" + props.metadata[i]["bw-image"]} />;
+        <img className="emblem-sm-img" src={IPFS_GATEWAY+"" + props.metadata[i].image} /> :
+        <img className="emblem-sm-img" src={IPFS_GATEWAY+"" + props.metadata[i]["bw-image"]} />;
       items.push(
         <div key={i} className="emblem-sm">
           <Link to={"/"+(i+1)}>
@@ -211,7 +211,7 @@ function Home(props) {
 function Store(props) {
   if (props.wrappedBooster == 0) {
     return (
-    <div className="store"> 
+    <div className="store">
       <h2>Crate Store</h2>
       <h4>Crate price: Ξ {props.boosterPrice/10e17}</h4>
       <br></br>
@@ -223,14 +223,14 @@ function Store(props) {
   );
   } else if (!props.wrappedBoosterStatus) {
     return (
-      <div className="store"> 
+      <div className="store">
         <h2>Crate Store</h2>
         <p>Your crate is being prepared, hang tight!</p>
       </div>
     );
   } else {
     return (
-      <div className="store"> 
+      <div className="store">
         <h2>Crate Store</h2>
         <p>Your crate is ready to be opened!</p>
         <Button variant="success" onClick={(event) => {
@@ -251,8 +251,8 @@ function Item(props) {
   var prev = id == 1 ? 10 : parseInt(id, 10) - 1;
   var word = items == 1 ? "copy": "copies";
   var imageUrl = hasIt ?
-    "https://gateway.pinata.cloud/ipfs/" + data.image :
-    "https://gateway.pinata.cloud/ipfs/" + data["bw-image"];
+    IPFS_GATEWAY+"" + data.image :
+    IPFS_GATEWAY+"" + data["bw-image"];
   return (
     <div className="detail">
       <h3>{hasIt ? data.name : "?????????"}</h3>
